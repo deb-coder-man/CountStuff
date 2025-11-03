@@ -3,6 +3,10 @@ import { Camera, Upload } from "lucide-react";
 import Processing from "./Processing";
 
 function App() {
+
+  // API link for backend api
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   // Preprocessed Photo State
   const [selectedPhoto, setSelectedPhoto] = useState<File | null>(null);
 
@@ -64,7 +68,7 @@ function App() {
     formData.append("file", photo);
 
     try {
-      const response = await fetch("http://localhost:8000/count", {
+      const response = await fetch(`${API_BASE_URL}/count`, {
         method: "POST",
         body: formData,
       });
