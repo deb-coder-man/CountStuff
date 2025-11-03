@@ -1,77 +1,38 @@
-# -----------------------------
-# Python / FastAPI backend
-# -----------------------------
+# Python virtual environments
+venv/
+.venv/
+backend/venv/
+backend/.venv/
+
+# Python caches
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.log
-*.sqlite3
-*.db
 
-# Virtual environments
-venv/
-.venv/
-env/
-.env/
-ENV/
-.idea/
-.vscode/
-
-# Build & cache
-build/
-dist/
+# Build / dist
 *.egg-info/
-*.egg
+dist/
+build/
 
-# Large model & data files
+# Big native libs & model weights
 *.pt
 *.pth
-*.weights
 *.onnx
-*.h5
 *.ckpt
-*.tflite
 *.dylib
 *.so
 *.bin
-*.zip
-*.tar
-*.tar.gz
-*.mp4
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.csv
-*.parquet
 
-# Torch & other libs accidentally committed
-backend/venv/
-backend/.venv/
-backend/venv/**
-backend/.venv/**
-backend/__pycache__/
-backend/*.dylib
-backend/*.so
-
-# -----------------------------
-# Frontend (React / Vite)
-# -----------------------------
+# Node stuff
 node_modules/
+frontend/node_modules/
 dist/
+frontend/dist/
 .vite/
-*.local
-*.env.local
-*.env.development.local
-*.env.test.local
-*.env.production.local
 
-# -----------------------------
-# System / OS
-# -----------------------------
+# OS/editor junk
 .DS_Store
 Thumbs.db
-*.swp
-*.swo
-*.bak
+.vscode/
+.idea/
