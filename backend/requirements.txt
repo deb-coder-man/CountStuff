@@ -1,7 +1,7 @@
 fastapi
-uvicorn
+uvicorn[standard]
 pillow
 ultralytics
-opencv-python
+torch     # if ultralytics doesn’t pull it in for you
+torchvision
 numpy
-python-multipart
