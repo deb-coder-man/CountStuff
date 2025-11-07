@@ -55,6 +55,23 @@ function App() {
     uploadInputRef.current?.click();
   };
 
+  async function downscaleImage(file: File, maxSide = 1600): Promise<Blob> {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    await new Promise((res, rej) => {
+      img.onload = res; img.onerror = rej; img.src = url;
+    });
+    const scale = Math.min(maxSide / img.width, maxSide / img.height, 1);
+    const w = Math.round(img.width * scale);
+    const h = Math.round(img.height * scale);
+    const canvas = document.createElement("canvas");
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext("2d")!;
+    ctx.drawImage(img, 0, 0, w, h);
+    URL.revokeObjectURL(url);
+    return new Promise((res) => canvas.toBlob(b => res(b!), "image/jpeg", 0.85));
+}
+
   const handleSubmit = async (photo: File | null) => {
     if (!photo || loading) {
       if (!photo) alert("Please upload a photo before submitting.");
@@ -64,8 +81,9 @@ function App() {
     setLoading(true);
     setCountResult(null);
 
+    const blob = await downscaleImage(photo, 1600);
     const formData = new FormData();
-    formData.append("file", photo);
+    formData.append("file", new File([blob], photo.name.replace(/\.\w+$/, ".jpg"), { type: "image/jpeg" }));
 
     try {
       const response = await fetch(`${API_BASE_URL}/count`, {
